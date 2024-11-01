@@ -641,10 +641,12 @@ function getCategorySummary(category, value) {
 }
 
 // New Page export that wraps MainComponent with RootLayout
-export default function Page() {
+const Page = () => {
   return (
     <RootLayout>
       <MainComponent />
     </RootLayout>
-  )
-}
+  );
+};
+
+export default Page;
