@@ -3,6 +3,11 @@ import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const metadata = {
+  title: 'Call Dashboard',
+  description: 'Call Analytics Dashboard',
+}
+
 export default function RootLayout({
   children,
 }: {
