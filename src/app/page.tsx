@@ -1,5 +1,6 @@
 'use client'
 
+import RootLayout from './layout'
 import React, { useEffect, useState } from 'react'
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -252,7 +253,7 @@ const Chart = ({ data, category, dateRange, setDateRange }) => {
   )
 }
 
-export default function Component() {
+function MainComponent() {
   const [callLogs, setCallLogs] = useState([])
   const [filteredCallLogs, setFilteredCallLogs] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -347,9 +348,7 @@ export default function Component() {
 
   if (isLoading) {
     return (
-      <div 
-        className="flex items-center justify-center min-h-screen relative"
-      >
+      <div className="flex items-center justify-center min-h-screen relative">
         <div className="relative z-10 text-white">Loading...</div>
       </div>
     )
@@ -357,9 +356,7 @@ export default function Component() {
 
   if (error) {
     return (
-      <div 
-        className="flex items-center justify-center min-h-screen relative"
-      >
+      <div className="flex items-center justify-center min-h-screen relative">
         <div className="relative z-10 text-white">{error}</div>
       </div>
     )
@@ -367,9 +364,7 @@ export default function Component() {
 
   if (!filteredCallLogs || filteredCallLogs.length === 0) {
     return (
-      <div 
-        className="flex flex-col items-center justify-center gap-6 min-h-screen p-4 relative"
-      >
+      <div className="flex flex-col items-center justify-center gap-6 min-h-screen p-4 relative">
         <div className="backdrop-blur-xl bg-black/30 p-12 rounded-3xl border border-white/40 shadow-2xl relative z-10 max-w-2xl w-full text-center">
           <div className="text-3xl font-bold text-white mb-8">
             {dateRange?.from && dateRange?.to 
@@ -387,7 +382,7 @@ export default function Component() {
     )
   }
 
-  const chartData = filteredCallLogs.map((call, index) => ({
+const chartData = filteredCallLogs.map((call, index) => ({
     name: `${index + 1}`,
     date: new Date(call.created_at).toISOString().split('T')[0],
     ...scoreCategories.reduce((acc, category) => ({
@@ -410,9 +405,7 @@ export default function Component() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div 
-      className="p-8 text-white min-h-screen relative"
-    >
+    <div className="p-8 text-white min-h-screen relative">
       <div className="mb-8">
         <Chart data={averageSuccessData} dateRange={dateRange} setDateRange={setDateRange} />
       </div>
@@ -502,6 +495,7 @@ export default function Component() {
           </Card>
         ))}
       </div>
+
       <div className="flex items-center justify-center gap-2 p-4 mt-8">
         <Button
           variant="ghost"
@@ -644,4 +638,13 @@ function getCategorySummary(category, value) {
   }
 
   return `${summaries[category]} ${performance}`
+}
+
+// New Page export that wraps MainComponent with RootLayout
+export default function Page() {
+  return (
+    <RootLayout>
+      <MainComponent />
+    </RootLayout>
+  )
 }
