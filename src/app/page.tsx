@@ -403,7 +403,7 @@ const chartData = filteredCallLogs.map((call, index) => ({
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  return (
+ return (
     <div className="p-8 text-white min-h-screen relative">
       <div className="mb-8">
         <Chart data={averageSuccessData} dateRange={dateRange} setDateRange={setDateRange} />
@@ -412,8 +412,14 @@ const chartData = filteredCallLogs.map((call, index) => ({
         {scoreCategories.map((category) => (
           <div key={category.key}>
             <Chart data={chartData} category={category} dateRange={dateRange} />
-          </div
-          const Page = () => {
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const Page = () => {
   return (
     <RootLayout>
       <MainComponent />
